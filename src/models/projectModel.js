@@ -16,9 +16,11 @@ const projectSchema = new mongoose.Schema({
     status:{
         type:String,
         enum:['ToDo','InProgress','Completed'],
-        default:'Todo'
+        default:'ToDo'
     }
 },
 {
     timestamps:true
 })
+
+module.exports = mongoose.model('project',projectSchema);

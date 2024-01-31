@@ -16,21 +16,11 @@ const employeeSchema = new mongoose.Schema({
         required:true
     },
     phoneNumber:{
-        countryCode:{
-            type:String,
-            default:"+91" //INDIA
-        },
-        number:{
-            type:String,
-            required:true
-        },
-        validate(value){
-            if(this.countryCode && this.number && value) return true;
-            else throw new Error ("phone number must include a country code and a number");
-        }
+       type:String,
+       required:true
     },
     address:{
-        streetAddress:String,
+        street:String,
         city:String,
         state:String,
         zip:String,
@@ -59,7 +49,7 @@ const employeeSchema = new mongoose.Schema({
         enum:["admin","Employee","Intern"],
         default:'Intern'
     },
-    doj:{
+    dateOfJoining:{
         type:Date,
         required:true
     },
@@ -68,6 +58,10 @@ const employeeSchema = new mongoose.Schema({
         required: function(){
             return this.type === 'Employee';
         }
+    },
+    isDeleted:{
+        type:Boolean,
+        default:false
     }
 },
 {

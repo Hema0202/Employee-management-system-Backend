@@ -1,9 +1,28 @@
 const router = require('express').Router();
+const {
+    registerEmployee,
+    loginEmployee,
+    getEmployeeById,
+    getEmployees,
+    updateEmployee,
+    deleteEmployee
+} =require("./controllers/employeeController")
+const {
+    authentication,
+    authorization
+}=require('./middlewares/auth')
 
-function testHandler(req,res){
-    res.send('working ok');
-}
 
-router.get('/test',testHandler);
+router.get('/test',(req,res)=>res.send('Working fine'));
+
+router.post('/register',authentication,authorization,registerEmployee);
+router.post('/login',loginEmployee);
+router.get("/employee/:id",authentication,authorization,getEmployeeById);
+router.get('/employees',authentication,authorization,getEmployees);
+
+router.all('/*',(req,res)=>status(404).send({
+    status:false,
+    message:'Not found'
+}))
 
 module.exports =router;

@@ -15,7 +15,7 @@ function employeeValidation(data){
         ...rest
     } = data;
 
-    if(rest) return {
+    if(Object.keys(rest).length) return {
         status:false,
         message:'Invalid input field'
     }
@@ -91,7 +91,7 @@ function employeeValidation(data){
         message:'Invalid date of birth'
     }
 
-    if(isNaN(new Date(dateOfBirth))) return{
+    if(isNaN(new Date(dateOfJoining))) return{
         status:false,
         message:'Invalid date of joining'
     }
